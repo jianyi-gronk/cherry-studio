@@ -53,6 +53,7 @@ import p_silicon from './silicon'
 import p_sophnet from './sophnet'
 import p_stepfun from './stepfun'
 import p_together from './together'
+import p_tokendance from './tokendance'
 import p_tokenhub from './tokenhub'
 import type { Provider } from './types'
 import p_vertexai from './vertexai'
@@ -63,6 +64,7 @@ import p_zhipu from './zhipu'
 
 /** Every provider, in registry order. Source of truth for data/providers.json + data/provider-models.json. */
 export const PROVIDERS: Provider[] = [
+  p_tokendance,
   p_cherryin,
   p_radeon_cloud,
   p_silicon,

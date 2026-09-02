@@ -168,7 +168,11 @@ export const TokenDanceModelsResponseSchema = z.object({
       created: z.number().optional(),
       description: z.string().optional(),
       context_length: z.number().optional(),
-      supported_protocols: z.array(z.string()).optional()
+      supported_protocols: z
+        .array(z.string())
+        .nullable()
+        .optional()
+        .transform((v) => v ?? undefined)
     })
   )
 })

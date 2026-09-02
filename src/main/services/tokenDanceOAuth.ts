@@ -58,6 +58,7 @@ function completeCallback(response: ServerResponse): void {
   const message = escapeHtml(t('settings.mcp.oauth.callback.message'))
   response.writeHead(200, {
     'Cache-Control': 'no-store',
+    Connection: 'close',
     'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'",
     'Content-Type': 'text/html; charset=utf-8',
     'X-Content-Type-Options': 'nosniff'
@@ -150,7 +151,10 @@ async function startCallbackServer(state: string): Promise<TokenDanceCallbackSer
     close: () => {
       clearTimeout(timeoutId)
       if (!server.listening) return Promise.resolve()
-      return new Promise<void>((resolve) => server.close(() => resolve()))
+      return new Promise<void>((resolve) => {
+        server.close(() => resolve())
+        server.closeAllConnections()
+      })
     }
   }
 }

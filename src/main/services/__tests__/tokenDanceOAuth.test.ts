@@ -50,6 +50,7 @@ describe('authorizeTokenDanceApiKey', () => {
     const browserResponse = await callbackResponse
 
     expect(browserResponse?.status).toBe(200)
+    expect(browserResponse?.headers.get('connection')).toBe('close')
     expect(await browserResponse?.text()).toContain('Authentication Successful')
     expect(authorizationUrl?.origin).toBe('https://tokendance.space')
     expect(authorizationUrl?.pathname).toBe('/auth')
